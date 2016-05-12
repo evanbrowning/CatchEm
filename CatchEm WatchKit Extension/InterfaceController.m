@@ -47,7 +47,9 @@ CMMotionManager *motionManager;
 }
 
 - (IBAction)pressPokeball {
+    NSLog(@"pressPokeball called");
     if (remainingCounts == 0 && !armed) {
+        NSLog(@"pressPokeball arming");
         [self startDeviceMotion];
         [_pokeballButton setBackgroundImageNamed:@"PokeballGlow"];
         armed = true;
@@ -55,8 +57,9 @@ CMMotionManager *motionManager;
 }
 
 -(void)throwPokeball {
+    NSLog(@"throwPokeball called");
     if (remainingCounts == 0) {
-        NSLog(@"pressPokeball called");
+        NSLog(@"throwPokeball success");
         timer = [NSTimer scheduledTimerWithTimeInterval:0.5
                                                  target:self
                                                selector:@selector(countDown)
@@ -82,6 +85,7 @@ CMMotionManager *motionManager;
         [[WKInterfaceDevice currentDevice] playHaptic:WKHapticTypeStart];
     }
     if (--remainingCounts <= 0) {
+        NSLog(@"countDown ended");
         [timer invalidate];
         remainingCounts = 0;
         [_pokeballButton setBackgroundImageNamed:@"Pokeball"];
@@ -103,6 +107,7 @@ CMMotionManager *motionManager;
         }];
     }
     if (--remainingCountsShake <= 0) {
+        NSLog(@"shake ended");
         [shakeTimer invalidate];
         remainingCountsShake = 0;
         [self animateWithDuration:0.5 animations:^{
@@ -123,7 +128,7 @@ CMMotionManager *motionManager;
 
 -(void) getValues:(NSTimer *) timer {
     CMAcceleration acceleration = motionManager.accelerometerData.acceleration;
-    if(acceleration.x + acceleration.y + acceleration.z > 3) {
+    if(acceleration.x + acceleration.y + acceleration.z > 2) {
         [self throwPokeball];
         [self stopDeviceMotion];
     }
