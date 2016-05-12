@@ -20,6 +20,7 @@ NSTimer *shakeTimer;
 int remainingCounts;
 int remainingCountsShake;
 
+
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
     
@@ -31,6 +32,7 @@ int remainingCountsShake;
     [super willActivate];
     remainingCounts = 0;
     remainingCountsShake = 0;
+    
 }
 
 - (void)didDeactivate {
@@ -41,7 +43,7 @@ int remainingCountsShake;
 - (IBAction)pressPokeball {
     if (remainingCounts == 0) {
         NSLog(@"pressPokeball called");
-        timer = [NSTimer scheduledTimerWithTimeInterval:1
+        timer = [NSTimer scheduledTimerWithTimeInterval:0.5
                                                  target:self
                                                selector:@selector(countDown)
                                                userInfo:nil
@@ -52,7 +54,7 @@ int remainingCountsShake;
                                                selector:@selector(shake)
                                                userInfo:nil
                                                 repeats:YES];
-        remainingCounts = 8;
+        remainingCounts = 16;
         remainingCountsShake = 28;
         [self countDown]; // Call once immediately
     }
@@ -63,7 +65,7 @@ int remainingCountsShake;
         [_pokeballButton setBackgroundImageNamed:@"Pokeball"];
     } else {
         [_pokeballButton setBackgroundImageNamed:@"PokeballGlow"];
-        [[WKInterfaceDevice currentDevice] playHaptic:WKHapticTypeNotification];
+        [[WKInterfaceDevice currentDevice] playHaptic:WKHapticTypeStart];
     }
     if (--remainingCounts == 0) {
         [timer invalidate];
