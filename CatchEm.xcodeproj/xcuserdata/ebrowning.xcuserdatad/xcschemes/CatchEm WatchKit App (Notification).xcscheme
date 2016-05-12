@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "0730"
+   version = "2.0">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7013BC551CE141260029546A"
+               BuildableName = "CatchEm WatchKit App.app"
+               BlueprintName = "CatchEm WatchKit App"
+               ReferencedContainer = "container:CatchEm.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7013BC281CE141250029546A"
+               BuildableName = "CatchEm.app"
+               BlueprintName = "CatchEm"
+               ReferencedContainer = "container:CatchEm.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7013BC641CE141260029546A"
+               BuildableName = "CatchEm WatchKit Extension.appex"
+               BlueprintName = "CatchEm WatchKit Extension"
+               ReferencedContainer = "container:CatchEm.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <Testables>
+      </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "7013BC551CE141260029546A"
+            BuildableName = "CatchEm WatchKit App.app"
+            BlueprintName = "CatchEm WatchKit App"
+            ReferencedContainer = "container:CatchEm.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <AdditionalOptions>
+      </AdditionalOptions>
+   </TestAction>
+   <LaunchAction
+      buildConfiguration = "Debug"
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      debugServiceExtension = "internal"
+      allowLocationSimulation = "YES"
+      launchAutomaticallySubstyle = "8"
+      notificationPayloadFile = "CatchEm WatchKit Extension/PushNotificationPayload.apns">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.carousel"
+         RemotePath = "/CatchEm WatchKit App">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "7013BC551CE141260029546A"
+            BuildableName = "CatchEm WatchKit App.app"
+            BlueprintName = "CatchEm WatchKit App"
+            ReferencedContainer = "container:CatchEm.xcodeproj">
+         </BuildableReference>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "7013BC551CE141260029546A"
+            BuildableName = "CatchEm WatchKit App.app"
+            BlueprintName = "CatchEm WatchKit App"
+            ReferencedContainer = "container:CatchEm.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <AdditionalOptions>
+      </AdditionalOptions>
+   </LaunchAction>
+   <ProfileAction
+      buildConfiguration = "Release"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      debugDocumentVersioning = "YES"
+      launchAutomaticallySubstyle = "8"
+      notificationPayloadFile = "CatchEm WatchKit Extension/PushNotificationPayload.apns">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.carousel"
+         RemotePath = "/CatchEm WatchKit App">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "7013BC551CE141260029546A"
+            BuildableName = "CatchEm WatchKit App.app"
+            BlueprintName = "CatchEm WatchKit App"
+            ReferencedContainer = "container:CatchEm.xcodeproj">
+         </BuildableReference>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "7013BC551CE141260029546A"
+            BuildableName = "CatchEm WatchKit App.app"
+            BlueprintName = "CatchEm WatchKit App"
+            ReferencedContainer = "container:CatchEm.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>
