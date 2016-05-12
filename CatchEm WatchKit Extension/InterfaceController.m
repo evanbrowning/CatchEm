@@ -7,7 +7,7 @@
 //
 
 #import "InterfaceController.h"
-
+#import <CoreMotion/CoreMotion.h>
 
 @interface InterfaceController()
 @end
@@ -20,6 +20,11 @@ NSTimer *shakeTimer;
 int remainingCounts;
 int remainingCountsShake;
 
+bool armed;
+
+
+NSTimer *motionTimer;
+CMMotionManager *motionManager;
 
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
@@ -32,6 +37,7 @@ int remainingCountsShake;
     [super willActivate];
     remainingCounts = 0;
     remainingCountsShake = 0;
+    armed = false;
     
 }
 
@@ -41,6 +47,14 @@ int remainingCountsShake;
 }
 
 - (IBAction)pressPokeball {
+    if (remainingCounts == 0 && !armed) {
+        [self startDeviceMotion];
+        [_pokeballButton setBackgroundImageNamed:@"PokeballGlow"];
+        armed = true;
+    }
+}
+
+-(void)throwPokeball {
     if (remainingCounts == 0) {
         NSLog(@"pressPokeball called");
         timer = [NSTimer scheduledTimerWithTimeInterval:0.5
@@ -50,10 +64,10 @@ int remainingCountsShake;
                                                 repeats:YES];
         
         shakeTimer = [NSTimer scheduledTimerWithTimeInterval:0.25
-                                                 target:self
-                                               selector:@selector(shake)
-                                               userInfo:nil
-                                                repeats:YES];
+                                                      target:self
+                                                    selector:@selector(shake)
+                                                    userInfo:nil
+                                                     repeats:YES];
         remainingCounts = 16;
         remainingCountsShake = 28;
         [self countDown]; // Call once immediately
@@ -67,8 +81,9 @@ int remainingCountsShake;
         [_pokeballButton setBackgroundImageNamed:@"PokeballGlow"];
         [[WKInterfaceDevice currentDevice] playHaptic:WKHapticTypeStart];
     }
-    if (--remainingCounts == 0) {
+    if (--remainingCounts <= 0) {
         [timer invalidate];
+        remainingCounts = 0;
         [_pokeballButton setBackgroundImageNamed:@"Pokeball"];
     }
 }
@@ -87,13 +102,38 @@ int remainingCountsShake;
             [self.pokeballButton setHorizontalAlignment:WKInterfaceObjectHorizontalAlignmentCenter];
         }];
     }
-    if (--remainingCountsShake == 0) {
+    if (--remainingCountsShake <= 0) {
         [shakeTimer invalidate];
-        
+        remainingCountsShake = 0;
         [self animateWithDuration:0.5 animations:^{
             [self.pokeballButton setHorizontalAlignment:WKInterfaceObjectHorizontalAlignmentCenter];
         }];
     }
+}
+
+- (void)startDeviceMotion {
+    // Create a CMMotionManager
+    motionManager = [[CMMotionManager alloc] init];
+    
+    motionTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(getValues:) userInfo:nil repeats:YES];
+    
+    motionManager.accelerometerUpdateInterval = 0.05;  // 20 Hz
+    [motionManager startAccelerometerUpdates];
+}
+
+-(void) getValues:(NSTimer *) timer {
+    CMAcceleration acceleration = motionManager.accelerometerData.acceleration;
+    if(acceleration.x + acceleration.y + acceleration.z > 3) {
+        [self throwPokeball];
+        [self stopDeviceMotion];
+    }
+}
+
+
+- (void)stopDeviceMotion {
+    [motionManager stopDeviceMotionUpdates];
+    [motionTimer invalidate];
+    armed = false;
 }
 
 @end
