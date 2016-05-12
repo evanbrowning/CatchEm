@@ -12,5 +12,4 @@
 @interface InterfaceController : WKInterfaceController
 - (IBAction)pressPokeball;
 @property (unsafe_unretained, nonatomic) IBOutlet WKInterfaceButton *pokeballButton;
-
 @end
