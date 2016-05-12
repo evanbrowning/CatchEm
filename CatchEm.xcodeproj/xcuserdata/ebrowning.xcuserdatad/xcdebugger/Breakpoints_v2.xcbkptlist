@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CatchEm WatchKit Extension/InterfaceController.m"
-            timestampString = "484718844.85482"
+            timestampString = "484720430.961694"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "-pressPokeball"
             landmarkType = "5">
          </BreakpointContent>

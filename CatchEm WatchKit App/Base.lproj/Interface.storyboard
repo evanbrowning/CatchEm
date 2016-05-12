@@ -10,7 +10,7 @@
             <objects>
                 <controller id="AgC-eL-Hgc" customClass="InterfaceController">
                     <items>
-                        <button width="1" alignment="center" verticalAlignment="center" backgroundImage="Pokeball" id="wTB-sD-S3h">
+                        <button width="125" height="125" alignment="center" verticalAlignment="center" backgroundImage="Pokeball" id="wTB-sD-S3h">
                             <connections>
                                 <action selector="pressPokeball" destination="AgC-eL-Hgc" id="J3a-3W-Wgo"/>
                             </connections>

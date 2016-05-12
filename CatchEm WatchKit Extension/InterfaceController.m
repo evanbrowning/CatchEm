@@ -16,7 +16,9 @@
 @implementation InterfaceController
 
 NSTimer *timer;
+NSTimer *shakeTimer;
 int remainingCounts;
+int remainingCountsShake;
 
 - (void)awakeWithContext:(id)context {
     [super awakeWithContext:context];
@@ -28,6 +30,7 @@ int remainingCounts;
     // This method is called when watch view controller is about to be visible to user
     [super willActivate];
     remainingCounts = 0;
+    remainingCountsShake = 0;
 }
 
 - (void)didDeactivate {
@@ -43,13 +46,20 @@ int remainingCounts;
                                                selector:@selector(countDown)
                                                userInfo:nil
                                                 repeats:YES];
-        remainingCounts = 7;
+        
+        shakeTimer = [NSTimer scheduledTimerWithTimeInterval:0.25
+                                                 target:self
+                                               selector:@selector(shake)
+                                               userInfo:nil
+                                                repeats:YES];
+        remainingCounts = 8;
+        remainingCountsShake = 28;
         [self countDown]; // Call once immediately
     }
 }
 
 -(void)countDown {
-    if (remainingCounts % 2 == 0) {
+    if (remainingCounts % 2 == 1) {
         [_pokeballButton setBackgroundImageNamed:@"Pokeball"];
     } else {
         [_pokeballButton setBackgroundImageNamed:@"PokeballGlow"];
@@ -58,6 +68,29 @@ int remainingCounts;
     if (--remainingCounts == 0) {
         [timer invalidate];
         [_pokeballButton setBackgroundImageNamed:@"Pokeball"];
+    }
+}
+
+-(void) shake {
+    if (remainingCountsShake % 4 == 0) {
+        [self animateWithDuration:0.25 animations:^{
+            [self.pokeballButton setHorizontalAlignment:WKInterfaceObjectHorizontalAlignmentLeft];
+        }];
+    } else if ((remainingCountsShake + 1) % 4 == 0){
+        [self animateWithDuration:0.25 animations:^{
+            [self.pokeballButton setHorizontalAlignment:WKInterfaceObjectHorizontalAlignmentRight];
+        }];
+    } else if ((remainingCountsShake + 2) % 4 == 0){
+        [self animateWithDuration:0.25 animations:^{
+            [self.pokeballButton setHorizontalAlignment:WKInterfaceObjectHorizontalAlignmentCenter];
+        }];
+    }
+    if (--remainingCountsShake == 0) {
+        [shakeTimer invalidate];
+        
+        [self animateWithDuration:0.5 animations:^{
+            [self.pokeballButton setHorizontalAlignment:WKInterfaceObjectHorizontalAlignmentCenter];
+        }];
     }
 }
 
