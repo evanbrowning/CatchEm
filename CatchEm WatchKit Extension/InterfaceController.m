@@ -141,19 +141,24 @@ CMMotionManager *motionManager;
     armed = false;
 }
 
+-(void) failThrow {
+    [_pokeballButton setBackgroundImageNamed:@"Pokeball"];
+}
+
 -(void) sendThrowRequest {
     NSLog(@"sending throw request");
     NSURLRequest *requestThrow =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://lgml-Feather8WN.corp.netflix.com:8080/throw"]];
     NSURLSession *session = [NSURLSession sharedSession];
     [[session dataTaskWithRequest:requestThrow completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         NSLog(@"got throw response");
-        [self throwPokeball];
         NSMutableDictionary *allData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
-        int result = (int)[allData valueForKey:@"throw"];
-        if (result == 1) {
+        NSNumber * result = (NSNumber *)[allData objectForKey:@"caught"];
+        if ([result boolValue] == YES) {
             NSLog(@"throw was successful");
+            [self throwPokeball];
         } else {
-            NSLog(@"throw was failure%i", result);
+            NSLog(@"throw was failure");
+            [self failThrow];
         }
     }] resume];
 }
