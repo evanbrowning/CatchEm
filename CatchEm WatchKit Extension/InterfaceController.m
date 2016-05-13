@@ -115,7 +115,7 @@ CMMotionManager *motionManager;
         }];
     }
 }
-
+	
 - (void)startDeviceMotion {
     // Create a CMMotionManager
     motionManager = [[CMMotionManager alloc] init];
@@ -129,7 +129,7 @@ CMMotionManager *motionManager;
 -(void) getValues:(NSTimer *) timer {
     CMAcceleration acceleration = motionManager.accelerometerData.acceleration;
     if(acceleration.x + acceleration.y + acceleration.z > 2) {
-        [self throwPokeball];
+        [self sendThrowRequest];
         [self stopDeviceMotion];
     }
 }
@@ -139,6 +139,23 @@ CMMotionManager *motionManager;
     [motionManager stopDeviceMotionUpdates];
     [motionTimer invalidate];
     armed = false;
+}
+
+-(void) sendThrowRequest {
+    NSLog(@"sending throw request");
+    NSURLRequest *requestThrow =[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://lgml-Feather8WN.corp.netflix.com:8080/throw"]];
+    NSURLSession *session = [NSURLSession sharedSession];
+    [[session dataTaskWithRequest:requestThrow completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        NSLog(@"got throw response");
+        [self throwPokeball];
+        NSMutableDictionary *allData = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingMutableContainers error:nil];
+        int result = (int)[allData valueForKey:@"throw"];
+        if (result == 1) {
+            NSLog(@"throw was successful");
+        } else {
+            NSLog(@"throw was failure%i", result);
+        }
+    }] resume];
 }
 
 @end
